@@ -7,33 +7,23 @@ import {Card, CardImg, CardImgOverLayer,CardText,CardBody, CardTitle} from 'reac
 */
 class Detail extends Component {
 	constructor(props){
-		super(props);
-		this.state = {
-			name: props.name,
-			description: props.description,
-			image: props.image
-		}
-
+		super(props);		
 	}
-
-
+	
 	 render() {
-
+	 
 	 	return (
-	 		<div clasName ="row">
-	 		
+	 		<div className="row">	 		
 	 		 	<Card className="col-12 col-md-5 m-1">
-                	<CardImg top src={this.state.image} alt={this.state.name} />
+                	<CardImg top src={this.props.image} alt={this.props.name} />
                 		<CardBody>
-                    		<CardTitle>{this.state.name}</CardTitle>
-                      		<CardText>{this.state.description}</CardText>
+                    		<CardTitle>{this.props.name}</CardTitle>
+                      		<CardText>{this.props.description}</CardText>
                     	</CardBody>
-             	</Card>
-             
-             	<div className="comments col-12 col-md-5 m-1">
-             		<h1>Comments</h1>
+             	</Card>             
+             	<div className="col-12 col-md-5 m-1">
+             		<h1>Comments</h1>             		
              	</div>
-
              </div>
 	 	);
 	 }
