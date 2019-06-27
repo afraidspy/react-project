@@ -7,24 +7,20 @@ class Menu extends Component {
 
     constructor(props) {
         super(props);
-
         this.state = {
             selectedDish: null
         }
     }
 
     onDishSelect(dish) {
-    
         this.setState({ selectedDish: dish});
     }
 
     renderDish(dish) {
         if (dish != null)
             return(
-                <div className='row'>
-                    <Detail name={this.state.selectedDish.name} description = {this.state.selectedDish.description} image = {this.state.selectedDish.image}/>
-                </div>
-                );
+                    <Detail name={this.state.selectedDish.name} description = {this.state.selectedDish.description} image = {this.state.selectedDish.image} comments = {this.state.selectedDish.comments}/>
+            );
         else
 
             return(
@@ -52,9 +48,9 @@ class Menu extends Component {
                 <div className="row">
                     {menu}
                 </div>
-                <div className="row">
+             
                     {this.renderDish(this.state.selectedDish)}                  
-                </div>
+             
             </div>
         );
     }
