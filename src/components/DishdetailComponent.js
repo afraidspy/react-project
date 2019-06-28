@@ -36,7 +36,8 @@ renderComments(comments){
         if (comments != null){
           const list = comments.map((item) => {
               return (
-                  <li>
+              //Showing each comment 
+                  <li key={item.id}>
                     <p>{item.comment}</p>
                     <p>-- { item.author } {item.date}</p>
                   </li>
@@ -44,12 +45,9 @@ renderComments(comments){
           });
 
           return (
-                <div>
-                  <h4>Comentarios</h4>
-                  <ul className="unstyleli">
+                  <ul className="list-unstyled">
                     {list}
                   </ul>
-                </div>
           );
 
         }else
@@ -66,6 +64,7 @@ renderComments(comments){
 	 	              {this.renderDish(this.props.dish)}
                </div>
                <div className="col-12 col-md-5 m-1"> 
+                  <h4>Comments</h4>
                   {this.renderComments(this.props.dish.comments)}
                </div>
           </div>
