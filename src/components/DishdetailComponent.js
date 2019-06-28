@@ -33,8 +33,6 @@ class Detail extends Component {
 	*/
 	
 renderComments(comments){
-        console.log("Comentarios");
-        console.log(comments);
         if (comments != null){
           const list = comments.map((item) => {
               return (
@@ -46,10 +44,12 @@ renderComments(comments){
           });
 
           return (
-              <ul className="unstyleli">
+                <div>
                   <h4>Comentarios</h4>
-                  {list}
-              </ul>
+                  <ul className="unstyleli">
+                    {list}
+                  </ul>
+                </div>
           );
 
         }else
@@ -72,7 +72,7 @@ renderComments(comments){
 	 	  );
       }else
             return(
-                <div>----------></div>
+                <div></div>
             );
       //End if
 	 }//End render
