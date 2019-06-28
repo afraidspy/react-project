@@ -30,8 +30,7 @@ class Detail extends Component {
 	/*
 	* Return the comments with an author and specific date about dish.
 	* @param {object} Array with comments. If array is empty, return a empty d
-	*/
-	
+	*/	
 renderComments(comments){
         if (comments != null){
           const list = comments.map((item) => {
