@@ -10,55 +10,72 @@ class Detail extends Component {
 		super(props);		
 	}
 	
-	/*
-	* Return comments with author and specific date.
-	* @param {object} Array with comments. If array is empty, return a empty d
-	*/
-	
-	renderComments(comments){
-        if (comments != null){
-        	
-        	const list = comments.map((item) => {
-            	return (
-              		<div className ="row">
-              			<p>{item.comment}</p>
-              			<p>-- { item.author } {item.date}</p>
-              		</div>
-            	);
-        	});
-
-            return (
-            	<div className="container">
-              		{list}
-            	</div>
-        	);
-
-        } else
+   renderDish(dish) {
+        if (dish != null){
+            return(
+                <Card>
+                    <CardImg top src={dish.image} alt={dish.name} />
+                    <CardBody>
+                      <CardTitle>{dish.name}</CardTitle>
+                      <CardText>{dish.description}</CardText>
+                    </CardBody>
+                </Card>             
+            );
+        }else
             return(
                 <div></div>
             );
-	}
+    }
+
+	/*
+	* Return the comments with an author and specific date about dish.
+	* @param {object} Array with comments. If array is empty, return a empty d
+	*/
+	
+renderComments(comments){
+        console.log("Comentarios");
+        console.log(comments);
+        if (comments != null){
+          const list = comments.map((item) => {
+              return (
+                  <li>
+                    <p>{item.comment}</p>
+                    <p>-- { item.author } {item.date}</p>
+                  </li>
+              );
+          });
+
+          return (
+              <ul className="unstyleli">
+                  <h4>Comentarios</h4>
+                  {list}
+              </ul>
+          );
+
+        }else
+            return(
+                <div></div>
+            );
+}
 	
 	 render() {
-
-	 	return (
-	 		<div className="row">	 	
-	 			<div className="col-12 col-md-5 m-1">	
-	 		 		<Card >
-                		<CardImg top src={this.props.image} alt={this.props.name} />
-                			<CardBody>
-                    			<CardTitle>{this.props.name}</CardTitle>
-                      			<CardText>{this.props.description}</CardText>
-                    		</CardBody>
-             		</Card>             
-             	</div>
-             	<div className="col-12 col-md-5 m-1">
-             		<h1>Comments</h1>    
-             		{this.renderComments(this.props.comments)}         		
-             	</div>
-             </div>
-	 	);
-	 }
+      if (this.props.dish != null){
+	 	   return (
+	 		    <div className="row">	 	
+	 			       <div className="col-12 col-md-5 m-1">	
+	 	              {this.renderDish(this.props.dish)}
+               </div>
+               <div className="col-12 col-md-5 m-1"> 
+                  {this.renderComments(this.props.dish.comments)}
+               </div>
+          </div>
+	 	  );
+      }else
+            return(
+                <div>----------></div>
+            );
+      //End if
+	 }//End render
 }
 
 export default Detail;
