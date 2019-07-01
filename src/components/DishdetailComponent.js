@@ -3,42 +3,35 @@ import {Card, CardImg, CardImgOverLayer,CardText,CardBody, CardTitle} from 'reac
 
 /**
 * Component to show details about a dish
-* @Jessica Santizo Galicia
+* @author Jessica Santizo Galicia
 */
-class Detail extends Component {
-	constructor(props){
-		super(props);		
-	}
-	
-   renderDish(dish) {
-        if (dish != null){
+   function RenderDish({dish}) {
             return(
-                <Card>
+                <div className ="col-12 col-md-5 m-1">
+                 <Card>
                     <CardImg top src={dish.image} alt={dish.name} />
                     <CardBody>
                       <CardTitle>{dish.name}</CardTitle>
                       <CardText>{dish.description}</CardText>
                     </CardBody>
-                </Card>             
+                  </Card>             
+                </div>
             );
-        }else
-            return(
-                <div></div>
-            );
+        
     }
 
 	/*
 	* Return the comments with an author and specific date about dish.
 	* @param {object} Array with comments. If array is empty, return a empty d
 	*/	
-renderComments(comments){
+function RenderComments({comments}){
         if (comments != null){
-          const list = comments.map((item) => {
+          const list = comments.map((comment) => {
               return (
               //Showing each comment 
-                  <li key={item.id}>
-                    <p>{item.comment}</p>
-                    <p>-- { item.author } {item.date}</p>
+                  <li key={comment.id}>
+                    <p>{comment.comment}</p>
+                    <p>-- { comment.author }  , {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}</p>
                   </li>
               );
           });
@@ -55,25 +48,20 @@ renderComments(comments){
             );
 }
 	
-	 render() {
-      if (this.props.dish != null){
-	 	   return (
-	 		    <div className="row">	 	
-	 			       <div className="col-12 col-md-5 m-1">	
-	 	              {this.renderDish(this.props.dish)}
-               </div>
-               <div className="col-12 col-md-5 m-1"> 
-                  <h4>Comments</h4>
-                  {this.renderComments(this.props.dish.comments)}
-               </div>
+  const DishDetail = (props) => {
+    if (props.dish != null){
+       return (
+          <div className="row">   
+                  <RenderDish dish = {props.dish} />
+                  <RenderComments comments = {props.dish.comments} />
           </div>
-	 	  );
-      }else
-            return(
-                <div></div>
-            );
-      //End if
-	 }//End render
-}
+      );
+    }else
+      return (
+        <div></div>
+      );
+   }//End render
 
-export default Detail;
+
+
+export default DishDetail;
