@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Card, CardImg, CardImgOverLayer,CardText,CardBody, CardTitle} from 'reactstrap';
+import {Card, CardImg, CardImgOverLayer, CardText,CardBody, CardTitle} from 'reactstrap';
 
 /**
 * Component to show details about a dish
