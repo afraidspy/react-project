@@ -17,7 +17,6 @@ import {Card, CardImg, CardImgOverLayer, CardText,CardBody, CardTitle} from 'rea
                   </Card>             
                 </div>
             );
-        
     }
 
 	/*
@@ -37,9 +36,12 @@ function RenderComments({comments}){
           });
 
           return (
+                <div class="col-12 col-md-5 m-1">
+                  <h4>Comments</h4>
                   <ul className="list-unstyled">
                     {list}
                   </ul>
+                </div>
           );
 
         }else
@@ -51,9 +53,11 @@ function RenderComments({comments}){
   const DishDetail = (props) => {
     if (props.dish != null){
        return (
+          <div className="container">
           <div className="row">   
                   <RenderDish dish = {props.dish} />
                   <RenderComments comments = {props.dish.comments} />
+          </div>
           </div>
       );
     }else
