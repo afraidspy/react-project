@@ -1,5 +1,20 @@
 import React, {Component} from 'react'
-import {Card, CardImg, CardImgOverLayer, CardText,CardBody, CardTitle} from 'reactstrap';
+import { Card, CardImg, CardImgOverlay,
+    CardTitle, CardBody, CardText, Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import { Link } from 'react-router-dom';
+
+ function RenderMenuItem ({dish, onClick}) {
+    return (
+       <Card>
+        <Link to={`/menu/${dish.id}`} >
+          <CardImg width="100%" src={dish.image} alt={dish.name} />
+            <CardImgOverlay>
+            <CardTitle>{dish.name}</CardTitle>
+            </CardImgOverlay>
+       </Link>
+      </Card>
+    );
+  }
 
 /**
 * Component to show details about a dish
