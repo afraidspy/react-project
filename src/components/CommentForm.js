@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
-import { Button, Row, Col, Label } from 'reactstrap';
 import { Control, LocalForm, Errors } from 'react-redux-form';
+import {  Button, Row, Col, Label, Input, Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem, Jumbotron, Modal, ModalHeader, ModalBody, Form, FormGroup } from 'reactstrap';
+import { NavLink } from 'react-router-dom';
+
 import { Link } from 'react-router-dom';
 
 const required = (val) => val && val.length;
@@ -42,13 +44,14 @@ class Comment extends Component {
     }
 
     render(){
-
-    	 <div className="row row-content">
+    
+    	return( <div className="row row-content">
             <div className="col-12">
 				<Button online onClick={this.toggleModal} >
                     <span className="fa fa-sign-in fa-lg"></span>
                     Login
                 </Button>	
+                This is a comment
             </div>
 
             <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
@@ -68,8 +71,9 @@ class Comment extends Component {
                             <Button type="submit" value="submit" color="primary">Login</Button>
                         </Form>
                     </ModalBody>
-                </Modal>
+             </Modal>
 
          </div>
+        );
     }
 }
