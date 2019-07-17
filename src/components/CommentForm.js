@@ -8,18 +8,24 @@ import { Link } from 'react-router-dom';
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
 const minLength = (len) => (val) => val && (val.length >= len);
-const isNumber = (val) => !isNaN(Number(val));
-const validEmail = (val) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
 
 class Comment extends Component {
 
-	construct(props){
-		this.state = {
-  			isModalOpen: false
-		};
+	  constructor(props) {
+        super(props);
 
-  		this.handleSubmit = this.handleSubmit.bind(this);
-  	  	this.toggleModal = this.toggleModal.bind(this);
+        this.state = {
+        	author: false,
+        	firstname: '',
+        	touched: {
+                author: false,
+                
+            }
+        };
+
+        this.toggleModal = this.toggleModal.bind(this);
+        this.handleComment = this.handleComment.bind(this);  
+        this.handleSubmit = this.handleSubmit.bind(this);
         
     }
 
@@ -45,35 +51,65 @@ class Comment extends Component {
 
     render(){
     
-    	return( <div className="row row-content">
-            <div className="col-12">
-				<Button online onClick={this.toggleModal} >
-                    <span className="fa fa-sign-in fa-lg"></span>
-                    Login
-                </Button>	
-                This is a comment
-            </div>
-
-            <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
+    	return( 
+    		<div className="col-12 col-md-5">            
+            	<Row className="form-group">
+                    <Col md={{size:10, offset: 2}}>
+                      <Button online onClick={this.toggleModal} className="btn btn-outline-secondary">
+                          <span className="fa fa-edit"></span>
+                             Submit comment
+                      </Button>
+                  </Col>
+             	</Row>
+             	 <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
                     <ModalHeader toggle={this.toggleModal}>Submit Comment</ModalHeader>
-                    <ModalBody>    
-                      <Form onSubmit={this.handleComment}>
-                      		<FormGroup>
-                                <Label htmlFor="username">Rating</Label>
-                                <Input type="text" id="username" name="username"
-                                    innerRef={(input) => this.username = input} />
-                            </FormGroup>
-                            <FormGroup>
+                    <ModalBody>   
+                    <div className="col-12"> 
+                      <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
+                             <Row className="form-group">
+                                <Label htmlFor="username">Rating</Label>   
+                                  <Control.select model=".rating" name="contactType"
+                                        className="form-control">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                    </Control.select>                             
+                            </Row>
+                            <Row className="form-group">
                                 <Label htmlFor="username">Your name</Label>
-                                <Input type="text" id="username" name="username"
-                                    innerRef={(input) => this.username = input} />
-                            </FormGroup>cm
-                            <Button type="submit" value="submit" color="primary">Login</Button>
-                        </Form>
+                                 <Control.text model=".author" id="author" name="author"
+                                        placeholder="Your name"
+                                        className="form-control"
+                                        validators={{
+                                            required, minLength: minLength(3), maxLength: maxLength(15)
+                                        }}
+                                         />
+                                    <Errors
+                                        className="text-danger"
+                                        model=".author"
+                                        show="touched"
+                                        messages={{
+                                            required: 'Required',
+                                            minLength: 'Must be greater than 2 characters',
+                                            maxLength: 'Must be 15 characters or less'
+                                        }}
+                                     />
+                            </Row>
+                            <Row className="form-group">
+                                <Label htmlFor="message"> Comment</Label>
+                                 <Control.textarea model=".message" id="message" name="message"
+                                        rows="6"
+                                        className="form-control" />
+                            </Row>
+                            <Button type="submit" value="submit" color="primary">Submit</Button>
+                        </LocalForm>
+                     </div>
                     </ModalBody>
-             </Modal>
-
-         </div>
+                </Modal>
+            
+         	</div>
         );
     }
 }
+
+export default Comment;
