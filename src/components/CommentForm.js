@@ -36,6 +36,7 @@ class Comment extends Component {
         event.preventDefault();
 
     }
+    
 
     handleSubmit(values) {
         console.log('Current State is: ' + JSON.stringify(values));
