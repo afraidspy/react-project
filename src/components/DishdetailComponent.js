@@ -7,6 +7,7 @@ import {  Button, Row, Col, Label, Input, Navbar, NavbarBrand, Nav, NavbarToggle
 import { NavLink } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Loading } from './LoadingComponent';
+import { baseUrl } from '../shared/baseUrl';
 
 
 
@@ -128,7 +129,7 @@ class CommentForm extends Component {
     return (
        <Card>
         <Link to={`/menu/${dish.id}`} >
-          <CardImg width="100%" src={dish.image} alt={dish.name} />
+           <CardImg width="100%" src={baseUrl + dish.image} alt={dish.name} />
             <CardImgOverlay>
             <CardTitle>{dish.name}</CardTitle>
             </CardImgOverlay>
@@ -144,7 +145,7 @@ class CommentForm extends Component {
    function RenderDish({dish}) {
             return(
                  <Card>
-                    <CardImg top src={dish.image} alt={dish.name} />
+                    <CardImg top src={baseUrl + dish.image} alt={dish.name} />
                     <CardBody>
                       <CardTitle>{dish.name}</CardTitle>
                       <CardText>{dish.description}</CardText>
